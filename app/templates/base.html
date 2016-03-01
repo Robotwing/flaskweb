@@ -1,0 +1,27 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - liqiuchiwing</title>
+    {% else %}
+    <title>Welcome!</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>liqiuchiwing: <a href="{{url_for('index')}}">Sign in</a>
+      {% if g.user.is_authenticated %}
+      | <a href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </body>
+</html>
